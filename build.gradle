@@ -21,9 +21,23 @@ java {
 }
 
 publishing {
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = "https://maven.pkg.github.com/rishithachocolate/gradle-simple"
+            credentials {
+                username = System.getenv("GITHUB_ACTOR")
+                password = System.getenv("GITHUB_TOKEN")
+            }
+        }
+    }
     publications {
-        maven(MavenPublication) {
-		from components.java
+        gpr(MavenPublication) {
+            groupId = 'com.github.jitpack'
+            artifactId = 'gradle-simple'
+            version = '1.1'
+
+            from components.java
         }
     }
 }
